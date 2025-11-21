@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethereal Cyberpunk Dreamscape Portal</title>
+    <style>
+        :root {
+            --neon-pink: #ff006e;
+            --neon-cyan: #00f5ff;
+            --neon-purple: #b537f2;
+            --neon-green: #39ff14;
+            --neon-blue: #0080ff;
+            --neon-orange: #ff6b1f;
+            --dark-bg: #0a0e27;
+            --glow-intensity: 1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--dark-bg);
+            font-family: 'Courier New', monospace;
+            user-select: none;
+        }
+
+        /* ===== BACKGROUND LAYERS ===== */
+        .scene-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Cosmic nebula background */
+        .nebula-layer {
+            background: radial-gradient(ellipse at 30% 40%, rgba(255, 0, 110, 0.3) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(0, 245, 255, 0.3) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 50%, rgba(181, 55, 242, 0.2) 0%, transparent 50%);
+            animation: nebula-drift 30s ease-in-out infinite;
+            filter: blur(40px);
+            opacity: 0.8;
+        }
+
+        @keyframes nebula-drift {
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+        }
+
+        /* City skyline layer */
+        .skyline-layer {
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 128, 255, 0.15) 30%, rgba(255, 0, 110, 0.1) 100%);
+            position: relative;
+        }
+
+        .skyline-layer::before {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: url("data:image/svg+xml,%3Csvg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='cityGrad' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230080ff;stop-opacity:0.3'/%3E%3Cstop offset='100%25' style='stop-color:%23ff006e;stop-opacity:0.1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%' height='100%' fill='url(%23cityGrad)'/%3E%3Crect x='5%25' y='20%25' width='8%25' height='80%25' fill='%2300f5ff' opacity='0.4'/%3E%3Crect x='15%25' y='30%25' width='6%25' height='70%25' fill='%23ff006e' opacity='0.3'/%3E%3Crect x='25%25' y='25%25' width='7%25' height='75%25' fill='%230080ff' opacity='0.35'/%3E%3Crect x='35%25' y='35%25' width='5%25' height='65%25' fill='%23b537f2' opacity='0.3'/%3E%3Crect x='45%25' y='20%25' width='8%25' height='80%25' fill='%2300f5ff' opacity='0.4'/%3E%3Crect x='55%25' y='28%25' width='6%25' height='72%25' fill='%23ff6b1f' opacity='0.35'/%3E%3Crect x='65%25' y='32%25' width='7%25' height='68%25' fill='%230080ff' opacity='0.3'/%3E%3Crect x='75%25' y='25%25' width='5%25' height='75%25' fill='%23b537f2' opacity='0.35'/%3E%3Crect x='85%25' y='30%25' width='8%25' height='70%25' fill='%2300f5ff' opacity='0.4'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+            filter: blur(2px);
+            animation: skyline-twinkle 4s ease-in-out infinite;
+        }
+
+        @keyframes skyline-twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Glyphs and runes layer */
+        .glyphs-layer {
+            position: relative;
+        }
+
+        .glyph {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.15;
+            color: var(--neon-cyan);
+            font-weight: bold;
+            text-shadow: 0 0 20px var(--neon-cyan);
+            animation: glyph-float 8s ease-in-out infinite;
+            transform: translateZ(100px) rotateZ(0deg);
+        }
+
+        @keyframes glyph-float {
+            0%, 100% { transform: translateY(0) rotateZ(0deg); opacity: 0.15; }
+            50% { transform: translateY(-40px) rotateZ(15deg); opacity: 0.3; }
+        }
+
+        .glyph:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; color: var(--neon-cyan); }
+        .glyph:nth-child(2) { right: 15%; top: 30%; animation-delay: 2s; color: var(--neon-pink); }
+        .glyph:nth-child(3) { left: 50%; top: 50%; animation-delay: 4s; color: var(--neon-purple); }
+        .glyph:nth-child(4) { right: 25%; bottom: 20%; animation-delay: 1s; color: var(--neon-blue); }
+        .glyph:nth-child(5) { left: 20%; bottom: 15%; animation-delay: 3s; color: var(--neon-green); }
+
+        /* Rain layer with refraction */
+        .rain-layer {
+            position: relative;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 245, 255, 0.05) 50%, transparent 100%);
+            mix-blend-mode: screen;
+        }
+
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 245, 255, 0.8) 50%, transparent 100%);
+            filter: blur(1px);
+            animation: rain-fall linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes rain-fall {
+            0% { transform: translateY(-100vh) scaleY(1); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(100vh) scaleY(1); opacity: 0; }
+        }
+
+        /* ===== CENTRAL PORTAL ===== */
+        .portal-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .portal {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 245, 255, 0.3) 0%, rgba(181, 55, 242, 0.2) 50%, transparent 100%);
+            border: 3px solid var(--neon-cyan);
+            box-shadow: 0 0 40px var(--neon-cyan), 
+                        inset 0 0 60px rgba(0, 245, 255, 0.4),
+                        inset 0 0 30px rgba(181, 55, 242, 0.3);
+            animation: portal-pulse 4s ease-in-out infinite, portal-spin 20s linear infinite;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        @keyframes portal-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 40px var(--neon-cyan), 
+                            inset 0 0 60px rgba(0, 245, 255, 0.4),
+                            inset 0 0 30px rgba(181, 55, 242, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 80px var(--neon-pink), 
+                            inset 0 0 80px rgba(255, 0, 110, 0.5),
+                            inset 0 0 40px rgba(181, 55, 242, 0.4);
+            }
+        }
+
+        @keyframes portal-spin {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        .portal::before {
+            content: '';
+            position: absolute;
+            inset: 15%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.3) 0%, transparent 40%);
+            animation: portal-inner-spin 15s linear infinite reverse;
+        }
+
+        @keyframes portal-inner-spin {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        .portal::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, 
+                            transparent 0deg, 
+                            var(--neon-pink) 45deg, 
+                            transparent 90deg,
+                            transparent 180deg,
+                            var(--neon-blue) 225deg,
+                            transparent 270deg);
+            opacity: 0.4;
+            animation: portal-arc 10s linear infinite;
+        }
+
+        @keyframes portal-arc {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+
+        .portal-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: ring-spin 25s linear infinite;
+        }
+
+        .portal-ring:nth-child(1) {
+            width: 280px;
+            height: 280px;
+            border-color: rgba(0, 245, 255, 0.5);
+            animation-duration: 25s;
+        }
+
+        .portal-ring:nth-child(2) {
+            width: 240px;
+            height: 240px;
+            border-color: rgba(255, 0, 110, 0.4);
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+
+        .portal-ring:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            border-color: rgba(181, 55, 242, 0.3);
+            animation-duration: 35s;
+        }
+
+        @keyframes ring-spin {
+            0% { transform: translate(-50%, -50%) rotateZ(0deg); }
+            100% { transform: translate(-50%, -50%) rotateZ(360deg); }
+        }
+
+        /* Energy tendrils */
+        .tendril {
+            position: absolute;
+            width: 3px;
+            height: 80px;
+            background: linear-gradient(180deg, var(--neon-pink) 0%, transparent 100%);
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 0;
+            animation: tendril-crackle 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px var(--neon-pink));
+        }
+
+        @keyframes tendril-crackle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .tendril:nth-child(4) { transform: translate(-50%, -50%) rotateZ(0deg); animation-delay: 0s; }
+        .tendril:nth-child(5) { transform: translate(-50%, -50%) rotateZ(90deg); animation-delay: 0.3s; }
+        .tendril:nth-child(6) { transform: translate(-50%, -50%) rotateZ(180deg); animation-delay: 0.6s; }
+        .tendril:nth-child(7) { transform: translate(-50%, -50%) rotateZ(270deg); animation-delay: 0.9s; }
+
+        /* ===== FLOATING ELEMENTS ===== */
+        .floating-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            perspective: 1200px;
+            z-index: 50;
+        }
+
+        /* Holographic koi fish */
+        .koi-fish {
+            position: absolute;
+            width: 120px;
+            height: 60px;
+            left: 20%;
+            top: 30%;
+            animation: koi-swim 15s ease-in-out infinite;
+            transform: translateZ(200px);
+        }
+
+        @keyframes koi-swim {
+            0% { transform: translateZ(200px) translateX(0) rotateZ(0deg); }
+            25% { transform: translateZ(200px) translateX(100px) rotateZ(5deg); }
+            50% { transform: translateZ(200px) translateX(200px) rotateZ(0deg); }
+            75% { transform: translateZ(200px) translateX(100px) rotateZ(-5deg); }
+            100% { transform: translateZ(200px) translateX(0) rotateZ(0deg); }
+        }
+
+        .koi-body {
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(90deg, var(--neon-orange) 0%, var(--neon-pink) 50%, var(--neon-orange) 100%);
+            border-radius: 50%;
+            position: relative;
+            filter: drop-shadow(0 0 15px var(--neon-orange)) drop-shadow(0 0 25px rgba(255, 107, 31, 0.5));
+        }
+
+        .koi-tail {
+            position: absolute;
+            right: -40px;
+            top: 10px;
+            width: 40px;
+            height: 20px;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-orange));
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+            animation: koi-tail-wave 1s ease-in-out infinite;
+            transform-origin: left center;
+        }
+
+        @keyframes koi-tail-wave {
+            0%, 100% { transform: rotateZ(0deg); }
+            50% { transform: rotateZ(-20deg); }
+        }
+
+        .koi-eye {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            top: 8px;
+            left: 15px;
+            filter: drop-shadow(0 0 3px white);
+        }
+
+        /* Torii gate */
+        .torii-gate {
+            position: absolute;
+            right: 15%;
+            bottom: 20%;
+            width: 100px;
+            height: 120px;
+            transform: perspective(800px) rotateX(15deg) rotateZ(-10deg) translateZ(100px);
+            animation: torii-float 6s ease-in-out infinite;
+        }
+
+        @keyframes torii-float {
+            0%, 100% { transform: perspective(800px) rotateX(15deg) rotateZ(-10deg) translateZ(100px) translateY(0); }
+            50% { transform: perspective(800px) rotateX(15deg) rotateZ(-10deg) translateZ(100px) translateY(-30px); }
+        }
+
+        .torii-top {
+            width: 90px;
+            height: 8px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan) 20%, var(--neon-cyan) 80%, transparent);
+            margin: 30px auto 0;
+            box-shadow: 0 0 15px var(--neon-cyan), inset 0 0 10px rgba(0, 245, 255, 0.6);
+            position: relative;
+        }
+
+        .torii-top::before,
+        .torii-top::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 40px;
+            background: linear-gradient(180deg, var(--neon-cyan), transparent);
+            top: 8px;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .torii-top::before { left: -5px; }
+        .torii-top::after { right: -5px; }
+
+        .torii-pillar {
+            width: 8px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--neon-cyan), rgba(0, 245, 255, 0.3));
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .torii-moss {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(57, 255, 20, 0.3) 2px,
+                rgba(57, 255, 20, 0.3) 4px
+            );
+            animation: moss-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes moss-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Cherry blossoms */
+        .petal {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-pink);
+            border-radius: 50%;
+            filter: drop-shadow(0 0 8px var(--neon-pink));
+            animation: petal-fall 8s linear infinite;
+            pointer-events: auto;
+        }
+
+        @keyframes petal-fall {
+            0% { 
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .text-container {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 200;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: bold;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px var(--neon-cyan),
+                         0 0 40px var(--neon-pink),
+                         0 0 60px rgba(0, 245, 255, 0.5);
+            animation: title-glow 3s ease-in-out infinite, title-glitch 8s ease-in-out infinite;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes title-glow {
+            0%, 100% { 
+                text-shadow: 0 0 20px var(--neon-cyan),
+                             0 0 40px var(--neon-pink);
+                filter: brightness(1);
+            }
+            50% { 
+                text-shadow: 0 0 30px var(--neon-cyan),
+                             0 0 60px var(--neon-pink),
+                             0 0 80px var(--neon-blue);
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes title-glitch {
+            0%, 95%, 100% { clip-path: inset(0); }
+            97% { clip-path: inset(15% 0 20% 0); transform: translateX(-5px); }
+        }
+
+        .subtitle {
+            font-size: clamp(0.8rem, 2vw, 1.3rem);
+            color: var(--neon-green);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px var(--neon-green);
+            animation: subtitle-fade 4s ease-in-out infinite;
+            margin-top: 1rem;
+        }
+
+        @keyframes subtitle-fade {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.8), transparent);
+            top: 0;
+            animation: scan-move 3s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scan-move {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* ===== CANVAS PARTICLE SYSTEM ===== */
+        .particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 75;
+            mix-blend-mode: screen;
+        }
+
+        /* ===== INTERACTIVE EFFECTS ===== */
+        .cursor-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 20px;
+            text-shadow: 0 0 10px var(--neon-cyan);
+            mix-blend-mode: screen;
+        }
+
+        .ripple {
+            position: absolute;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: ripple-expand 0.8s ease-out forwards;
+        }
+
+        @keyframes ripple-expand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+            }
+        }
+
+        /* ===== RESPONSIVE ADJUSTMENTS ===== */
+        @media (max-width: 768px) {
+            .portal {
+                width: 200px;
+                height: 200px;
+            }
+
+            .portal-ring:nth-child(1) { width: 180px; height: 180px; }
+            .portal-ring:nth-child(2) { width: 140px; height: 140px; }
+            .portal-ring:nth-child(3) { width: 100px; height: 100px; }
+
+            .glyph { font-size: 1.5rem; }
+            
+            .koi-fish { width: 80px; height: 40px; }
+            .torii-gate { width: 60px; height: 80px; }
+
+            .title { font-size: clamp(1.5rem, 6vw, 2.5rem); }
+            .subtitle { font-size: clamp(0.7rem, 1.5vw, 1rem); }
+        }
+
+        @media (max-width: 480px) {
+            .portal {
+                width: 140px;
+                height: 140px;
+                border-width: 2px;
+            }
+
+            .portal-ring:nth-child(1) { width: 120px; height: 120px; }
+            .portal-ring:nth-child(2) { width: 80px; height: 80px; }
+            .portal-ring:nth-child(3) { width: 40px; height: 40px; }
+
+            .glyph { font-size: 1rem; }
+            .koi-fish { display: none; }
+            .torii-gate { width: 40px; height: 60px; }
+            .petal { width: 4px; height: 4px; }
+        }
+
+        /* ===== SPECIAL EFFECTS ===== */
+        .flash-effect {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 10000;
+            pointer-events: none;
+            animation: flash 0.5s ease-out forwards;
+        }
+
+        @keyframes flash {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .aberration-effect {
+            animation: aberration 0.6s ease-out forwards;
+        }
+
+        @keyframes aberration {
+            0% {
+                filter: drop-shadow(3px 0 0 var(--neon-pink)) drop-shadow(-3px 0 0 var(--neon-cyan));
+            }
+            100% {
+                filter: drop-shadow(0 0 0 transparent);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scene-container" id="sceneContainer">
+        <!-- Background layers -->
+        <div class="layer nebula-layer"></div>
+        <div class="layer skyline-layer"></div>
+        <div class="layer glyphs-layer" id="glyphsLayer">
+            <div class="glyph">⬢</div>
+            <div class="glyph">◈</div>
+            <div class="glyph">✦</div>
+            <div class="glyph">◆</div>
+            <div class="glyph">✧</div>
+        </div>
+
+        <!-- Rain layer -->
+        <div class="layer rain-layer" id="rainLayer"></div>
+
+        <!-- Canvas for particles -->
+        <canvas class="particle-canvas" id="particleCanvas"></canvas>
+
+        <!-- Portal -->
+        <div class="portal-wrapper" id="portalWrapper">
+            <div class="portal" id="portal">
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+                <div class="portal-ring"></div>
+                <div class="tendril"></div>
+                <div class="tendril"></div>
+                <div class="tendril"></div>
+                <div class="tendril"></div>
+            </div>
+        </div>
+
+        <!-- Floating elements -->
+        <div class="floating-container">
+            <!-- Koi fish -->
+            <div class="koi-fish">
+                <div class="koi-body">
+                    <div class="koi-eye"></div>
+                    <div class="koi-tail"></div>
+                </div>
+            </div>
+
+            <!-- Torii gate -->
+            <div class="torii-gate">
+                <div class="torii-top"></div>
+                <div class="torii-pillar">
+                    <div class="torii-moss"></div>
+                </div>
+            </div>
+
+            <!-- Petals -->
+            <div id="petalContainer"></div>
+        </div>
+
+        <!-- Text container -->
+        <div class="text-container">
+            <div class="title" id="title">ネオンの夢</div>
+            <div class="scan-line"></div>
+            <div class="subtitle">Click the portal to transcend reality</div>
+        </div>
+    </div>
+
+    <script>
+        /* ===== PARTICLE SYSTEM ===== */
+        class ParticleSystem {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+                this.init();
+            }
+
+            resizeCanvas() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+
+            init() {
+                for (let i = 0; i < 200; i++) {
+                    this.particles.push(this.createParticle());
+                }
+            }
+
+            createParticle() {
+                return {
+                    x: Math.random() * this.canvas.width,
+                    y: Math.random() * this.canvas.height,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    radius: Math.random() * 2 + 1,
+                    opacity: Math.random() * 0.6 + 0.2,
+                    color: ['#00f5ff', '#ff006e', '#b537f2', '#39ff14'][Math.floor(Math.random() * 4)],
+                    life: Math.random() * 200 + 100
+                };
+            }
+
+            update() {
+                this.particles.forEach((p, i) => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.life--;
+
+                    if (p.x < 0 || p.x > this.canvas.width || p.y < 0 || p.y > this.canvas.height || p.life < 0) {
+                        this.particles[i] = this.createParticle();
+                    }
+                });
+            }
+
+            render() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.particles.forEach(p => {
+                    this.ctx.fillStyle = p.color;
+                    this.ctx.globalAlpha = (p.life / 100) * p.opacity;
+                    this.ctx.beginPath();
+                    this.ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+                this.ctx.globalAlpha = 1;
+            }
+
+            animate() {
+                this.update();
+                this.render();
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        /* ===== RAIN GENERATION ===== */
+        function initRain() {
+            const rainLayer = document.getElementById('rainLayer');
+            const rainCount = Math.min(50, Math.ceil(window.innerWidth / 30));
+
+            for (let i = 0; i < rainCount; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.top = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 0.5 + 0.8) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                rainLayer.appendChild(drop);
+            }
+        }
+
+        /* ===== PETAL GENERATION ===== */
+        function initPetals() {
+            const container = document.getElementById('petalContainer');
+            const petalCount = 30;
+
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.top = (Math.random() * 50 - 50) + '%';
+                petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                petal.style.animationDelay = Math.random() * 8 + 's';
+                container.appendChild(petal);
+            }
+        }
+
+        /* ===== MOUSE TRACKING & PARALLAX ===== */
+        const sceneContainer = document.getElementById('sceneContainer');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const offsetX = (mouseX - centerX) / centerX * 20;
+            const offsetY = (mouseY - centerY) / centerY * 20;
+
+            const skyline = document.querySelector('.skyline-layer');
+            if (skyline) {
+                skyline.style.transform = `translateX(${offsetX * 0.3}px) translateY(${offsetY * 0.2}px)`;
+            }
+
+            const glyphs = document.querySelectorAll('.glyph');
+            glyphs.forEach((g, i) => {
+                const factor = 0.2 + (i * 0.1);
+                g.style.transform = `translateX(${offsetX * factor}px) translateY(${offsetY * factor}px)`;
+            });
+
+            const portal = document.getElementById('portal');
+            const portalWrapper = document.getElementById('portalWrapper');
+            if (portal && portalWrapper) {
+                const dist = Math.hypot(mouseX - window.innerWidth / 2, mouseY - window.innerHeight / 2);
+                const maxDist = 300;
+                if (dist < maxDist) {
+                    const intensity = 1 - (dist / maxDist);
+                    portal.style.boxShadow = `0 0 ${40 + intensity * 60}px var(--neon-cyan), 
+                                              inset 0 0 ${60 + intensity * 40}px rgba(0, 245, 255, 0.4),
+                                              inset 0 0 ${30 + intensity * 30}px rgba(181, 55, 242, 0.3)`;
+                }
+            }
+        });
+
+        /* ===== PORTAL INTERACTION ===== */
+        document.getElementById('portal').addEventListener('click', (e) => {
+            createFlashEffect();
+            createAberrationEffect();
+            createRippleEffect(e.clientX, e.clientY);
+            vibrate();
+        });
+
+        function createFlashEffect() {
+            const flash = document.createElement('div');
+            flash.className = 'flash-effect';
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 500);
+        }
+
+        function createAberrationEffect() {
+            const container = document.getElementById('sceneContainer');
+            container.classList.add('aberration-effect');
+            setTimeout(() => container.classList.remove('aberration-effect'), 600);
+        }
+
+        function createRippleEffect(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = (x - 100) + 'px';
+            ripple.style.top = (y - 100) + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 800);
+        }
+
+        function vibrate() {
+            if (navigator.vibrate) {
+                navigator.vibrate([10, 20, 10, 30, 20]);
+            }
+        }
+
+        /* ===== CURSOR PARTICLES ===== */
+        let lastTrailTime = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastTrailTime > 50) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.textContent = '✦';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                document.body.appendChild(trail);
+
+                const startOpacity = 1;
+                const startX = e.clientX;
+                const startY = e.clientY;
+                let frame = 0;
+
+                const anim = setInterval(() => {
+                    frame++;
+                    const progress = frame / 15;
+                    trail.style.opacity = startOpacity * (1 - progress);
+                    trail.style.transform = `translateY(${-frame * 3}px)`;
+
+                    if (frame >= 15) {
+                        clearInterval(anim);
+                        trail.remove();
+                    }
+                }, 16);
+
+                lastTrailTime = now;
+            }
+        });
+
+        /* ===== INITIALIZATION ===== */
+        window.addEventListener('load', () => {
+            initRain();
+            initPetals();
+            new ParticleSystem('particleCanvas').animate();
+        });
+
+        /* Touch support for mobile */
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            const event = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            document.dispatchEvent(event);
+        });
+
+        document.getElementById('portal').addEventListener('touchend', (e) => {
+            const touch = e.changedTouches[0];
+            createFlashEffect();
+            createAberrationEffect();
+            createRippleEffect(touch.clientX, touch.clientY);
+            vibrate();
+        });
+    </script>
+</body>
+</html>
